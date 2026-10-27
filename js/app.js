@@ -5,7 +5,7 @@ const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&a
 const LS = 'izinku:v1:', st = { get(k) { try { return JSON.parse(localStorage.getItem(LS + k)); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(LS + k, JSON.stringify(v)); } catch (e) {} }, del(k) { try { localStorage.removeItem(LS + k); } catch (e) {} } };
 const S = { tok: st.get('tok'), me: null, jenis: [], list: [], notif: [], tab: 'jam', f: 'semua', q: '' };
 const BL = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
-const fd = s => { if (!s) return '-'; const [y, m, d] = s.slice(0, 10).split('-'); return `${d} ${BL[m - 1]} ${y}`; };
+const fd = s => { if (!s) return '-'; if (!/^\d{4}-\d{2}-\d{2}/.test(s)) { const t = new Date(s); if (isNaN(t)) return String(s); s = t.toISOString(); } const [y, m, d] = s.slice(0, 10).split('-'); return `${d} ${BL[m - 1]} ${y}`; };
 const ft = s => s ? fd(s) + ' · ' + s.slice(11, 16) : '-';
 const ini = n => String(n || '?').replace(/[^A-Za-z ]/g, '').split(' ').filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase();
 const dur = x => x.Tipe === 'Jam' ? (m => (m / 60 % 1 ? (m / 60).toFixed(1) : m / 60) + ' Jam')((+x.JamAkhir.slice(0, 2) * 60 + +x.JamAkhir.slice(3)) - (+x.JamMulai.slice(0, 2) * 60 + +x.JamMulai.slice(3))) : ((Date.parse(x.TglAkhir) - Date.parse(x.TglMulai)) / 864e5 + 1) + ' Hari';
