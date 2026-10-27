@@ -20,3 +20,9 @@ Script Properties → tambah `FONNTE_TOKEN` (dari fonnte.com) → di sheet `Peng
 
 ## Rahasia
 Otomatis: `TOKEN_SECRET`, `SPREADSHEET_ID`, `ROOT_FOLDER_ID`, `UPLOADS_FOLDER`. Diisi Anda: `FONNTE_TOKEN`. Sandi pengguna disimpan sebagai hash.
+
+## Pembaruan: Rekap, Kelola Jenis Izin, Kelola Pegawai
+- Backend: tempel ulang `Kode.gs` → **Deploy → Kelola deployment → ✏️ → Versi baru** (URL tetap, sesi lama tetap berlaku). Tidak perlu menjalankan setup lagi.
+- Frontend: salin file baru ke folder repo → `git add .` · `git commit -m "rekap dan kelola data"` · `git push` → Ctrl+Shift+R.
+- Rekap: Excel memuat pustaka SheetJS dari cdnjs; PDF memakai tombol **PDF / Cetak** → pilih "Simpan sebagai PDF" di dialog cetak.
+- Impor pegawai: format `nama,username,peran,wa,nip,jabatan`; sandi acak tiap akun tampil sekali setelah impor.
